@@ -1,7 +1,7 @@
 package com.dinonee.springboot.api.controllers;
 
 import com.dinonee.springboot.api.models.entities.Cliente;
-import com.dinonee.springboot.api.models.request.ClienteNewDTO;
+import com.dinonee.springboot.api.models.request.ClienteRequest;
 import com.dinonee.springboot.api.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,7 +26,7 @@ public class ClienteController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> save(@RequestBody @Validated ClienteNewDTO clienteNewDTO) {
+    public ResponseEntity<?> save(@RequestBody @Validated ClienteRequest clienteNewDTO) {
         Cliente clienteNuevo = clienteService.save(clienteNewDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(clienteNuevo);
     }

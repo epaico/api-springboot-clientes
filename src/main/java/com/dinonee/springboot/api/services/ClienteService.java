@@ -1,7 +1,7 @@
 package com.dinonee.springboot.api.services;
 
 import com.dinonee.springboot.api.models.entities.Cliente;
-import com.dinonee.springboot.api.models.request.ClienteNewDTO;
+import com.dinonee.springboot.api.models.request.ClienteRequest;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ public interface ClienteService {
 
     Cliente findById(Long id);
 
-    Cliente save(ClienteNewDTO clienteNewDTO);
+    Cliente save(ClienteRequest clienteNewDTO);
 
     Cliente upate(Cliente cliente);
 

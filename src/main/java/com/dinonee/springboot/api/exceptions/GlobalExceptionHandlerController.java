@@ -1,7 +1,9 @@
 package com.dinonee.springboot.api.exceptions;
 
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -9,7 +11,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class GlobalExceptionHandlerController {
@@ -29,7 +33,12 @@ public class GlobalExceptionHandlerController {
     public ResponseEntity<?> badRequest(MethodArgumentNotValidException ex,
                                         HttpServletRequest request) {
         Error error = new Error();
-        error.setMessage(Objects.requireNonNull(ex.getBindingResult().getFieldError()).getDefaultMessage());
+        //error.setMessage(Objects.requireNonNull(ex.getBindingResult().getFieldError()).getDefaultMessage());
+        String errors = ex.getBindingResult().getFieldErrors()
+                .stream()
+                .map(err -> err.getField() + " " + err.getDefaultMessage() )
+                .reduce("", (acc, el) -> acc.concat(el).concat(", \n "));
+        error.setMessage(errors);
         error.setStatus(HttpStatus.BAD_REQUEST.value());
         error.setTimestamp(new Date().getTime());
 

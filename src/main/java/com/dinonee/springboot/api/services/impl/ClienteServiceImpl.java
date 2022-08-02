@@ -2,7 +2,7 @@ package com.dinonee.springboot.api.services.impl;
 
 import com.dinonee.springboot.api.exceptions.ResourceNotFoundException;
 import com.dinonee.springboot.api.models.entities.Cliente;
-import com.dinonee.springboot.api.models.request.ClienteNewDTO;
+import com.dinonee.springboot.api.models.request.ClienteRequest;
 import com.dinonee.springboot.api.repositories.ClienteRepository;
 import com.dinonee.springboot.api.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Transactional
     @Override
-    public Cliente save(ClienteNewDTO clienteNewDTO) {
+    public Cliente save(ClienteRequest clienteNewDTO) {
         Cliente cliente = new Cliente();
         cliente.setNombre(clienteNewDTO.getNombre());
         cliente.setApellido(clienteNewDTO.getApellido());

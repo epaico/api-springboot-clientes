@@ -8,5 +8,4 @@ public class Error {
     private int status;
     private Long timestamp;
 
-
 }

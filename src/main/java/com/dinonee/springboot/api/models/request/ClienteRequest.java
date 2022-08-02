@@ -6,11 +6,11 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 @Data
-public class ClienteNewDTO {
-    @NotEmpty(message = "Nombre no puede ser vacio")
+public class ClienteRequest {
+    @NotEmpty(message = "no puede ser vacio")
     private String nombre;
     private String apellido;
-    @NotEmpty(message = "Email no puede ser vacio")
-    @Email
+    @NotEmpty(message = "no puede ser vacio")
+    @Email(message = "debe ser una direccion de correo valida")
     private String email;
 }
